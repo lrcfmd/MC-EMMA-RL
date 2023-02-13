@@ -1,0 +1,30 @@
+potential set:[5 4 1 0 5]
+species
+Y core 3
+buck
+Y core O shel 1116.0742 0.35451 0.0 0.0 12.0
+species
+Ba core 0.169
+Ba shel 1.831
+buck
+Ba shel O shel 4818.416 0.3067 0.0 0.0 12.0
+spring
+Ba 34.05
+species
+Ca core 0.719
+Ca shel 1.281
+buck
+Ca shel O shel 2272.741 0.2986 0.0 0.0 12.0
+spring
+Ca 34.05
+species
+Fe core 3
+buck
+Fe core O shel 1199.25 0.3299 0.0 0.0 12.0
+species
+O core 0.869
+O shel -2.869
+buck
+O shel O shel 22764.3 0.149 27.89 0.0 12.0
+spring
+O 74.92
