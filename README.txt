@@ -1,4 +1,4 @@
-MC-EMMA is generally avalible from: http://pcwww.liverpool.ac.uk/~msd30/software/MC-EMMA.html, under the GNU licence. The version provided is to �future proof� the input files provided in the data repository, should the input format change in a future version of the code.
+MC-EMMA is generally avalible from: http://pcwww.liverpool.ac.uk/~msd30/software/MC-EMMA.html, under the GNU licence. The version provided uses Reinforcement Learning package RLCSP to optimize basin hopping routine. The MC-EMMA original version without RLCSP is placed here: https://github.com/lrcfmd/MC-EMMA-stable.
 
 How to run MC-EMMA:
 
@@ -7,7 +7,7 @@ python < [MY_INPUT]].py > [MY_OUTPUT]
 
 Guide to MC-EMMA input file:
 
-In this data repository, there are several example input files for MC-EMMA, for the calculations we performed in this work, below is a brief guide to create new input files for MC-EMMA:
+In this data repository, there as an example input file for MC-EMMA, for the calculations we performed in this work, below is a brief guide to create new input files for MC-EMMA:
 1) Import commands: you will need to include the following two import statements:
 �from mc_emma import * �
 �import numpy�
