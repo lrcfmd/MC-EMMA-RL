@@ -1,4 +1,4 @@
-MC-EMMA is generally avalible from: http://pcwww.liverpool.ac.uk/~msd30/software/MC-EMMA.html, under the GNU licence. The version provided uses Reinforcement Learning package RLCSP to optimize basin hopping routine. The MC-EMMA original version without RLCSP is placed here: https://github.com/lrcfmd/MC-EMMA-stable.
+MC-EMMA is generally avalible from: http://pcwww.liverpool.ac.uk/~msd30/software/MC-EMMA.html, under the GNU licence. The version provided uses Reinforcement Learning package RLCSP (https://github.com/lrcfmd/rlcsp) to optimize basin hopping routine. The MC-EMMA original version without RLCSP is placed here: https://github.com/lrcfmd/MC-EMMA-stable.
 
 How to run MC-EMMA:
 
