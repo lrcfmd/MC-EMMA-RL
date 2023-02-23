@@ -7,16 +7,18 @@ from ase.calculators.gulp import GULP
 import platform
 import re
 from ase.io import *
+from threading import Thread
+import functools
 import time
-import shutil
 #target = "temp01.res"
 #restart= "restart.res"
 #head = "head2.txt"
 
-def run_gulp(atoms='',shel=None,kwds='',opts='',lib='',produce_steps='',
-	gulp_command='gulp < gulp.gin > gulp.got'):
 
+def run_gulp(atoms='',shel=None,kwds='',opts='',lib='',produce_steps='',
+	gulp_command='gulp < gulp.gin > gulp.got',gulp_timeout=''):
 	iat=len(atoms)
+	sleeptime=10
 	converged = False
 	if os.path.isfile("temp.res"):
 		os.remove("temp.res")
@@ -32,33 +34,18 @@ def run_gulp(atoms='',shel=None,kwds='',opts='',lib='',produce_steps='',
 			if not 'dump temp.res\n' in opts[i]:
 				opts[i].append('dump temp.res\n')
 			if shel == None:
-				if lib != None:
-					calc=GULP(keywords=kwds[i],options=opts[i],library=lib)
-				if lib == None:
-					calc=GULP(keywords=kwds[i],options=opts[i])
-
+				calc=GULP(keywords=kwds[i],options=opts[i],library=lib)
 			else:
-				if lib != None:
-					calc=GULP(keywords=kwds[i],options=opts[i],library=lib,shel=shel)
-				if lib == None:
-					calc=GULP(keywords=kwds[i],options=opts[i])
-
+				calc=GULP(keywords=kwds[i],options=opts[i],library=lib,shel=shel)
 			atoms.set_calculator(calc)
 			atoms.get_calculator().optimized = False
 			try:
 				energy=atoms.get_potential_energy()
-				src_file = 'gulp.got'
-				dest_dir = '../gulp_files'
-				try:
-					if not os.path.exists(dest_dir):
-						os.mkdir(dest_dir)
-					dest_file = os.path.join(dest_dir, str(round(time.time() * 1000)) + '.got')
-					shutil.copyfile(src_file, dest_file)
-				except:
-				 	print('Exception while copying gulp.got')
+									
 				if len(atoms) != iat:
 					converged = False
 					break
+					
 				try:
 					if glob.glob("gulptmp*") != []:
 						if platform.system() == 'Windows':
@@ -86,6 +73,7 @@ def run_gulp(atoms='',shel=None,kwds='',opts='',lib='',produce_steps='',
 				atoms.set_calculator(calc)
 				try:
 					energy=atoms.get_potential_energy()
+
 					if len(atoms) != iat:
 						converged = False
 						break
@@ -138,8 +126,7 @@ def run_gulp(atoms='',shel=None,kwds='',opts='',lib='',produce_steps='',
 				for j in opts[i]:
 					new_file.write(j)
 					new_file.write("\n")
-				if lib != None:
-					new_file.write(str("library "+str(lib)))
+				new_file.write(str("library "+str(lib)))
 				new_file.write("\n")
 				cp=f[start:end]
 				
@@ -148,6 +135,7 @@ def run_gulp(atoms='',shel=None,kwds='',opts='',lib='',produce_steps='',
 				new_file.close()
 				
 				os.system(gulp_command)
+				
 				output=open("gulp.got",'r').readlines()
 				if 'opti' in kwds[i]:
 					converged = '  **** Optimisation achieved ****\n' in output
@@ -158,7 +146,7 @@ def run_gulp(atoms='',shel=None,kwds='',opts='',lib='',produce_steps='',
 						if "Total lattice energy" in j:
 							if "eV" in j:
 								e_line=j
-					energy = float(e_line[e_line.index('-'):-4])
+					energy = float(e_line[e_line.index('-'):e_line.index('eV')-1])
 					atoms = read_gulp("temp.res")
 				
 				if 'sing' not in kwds[i]:
@@ -168,7 +156,7 @@ def run_gulp(atoms='',shel=None,kwds='',opts='',lib='',produce_steps='',
 								e_line=j
 								break
 						
-						energy=float(e_line[e_line.index('-'):-4])
+						energy = float(e_line[e_line.index('-'):e_line.index('eV')-1])
 						
 						atoms=read_gulp("temp.res")
 						

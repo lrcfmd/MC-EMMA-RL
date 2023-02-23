@@ -405,7 +405,7 @@ reg_params={'e_threshold': 0, 'beta': 0, 'free_term': 0, 'h_type': 'non-linear'}
     print("|                                                            |")
     print("|              Monte-Carlo EMMA v 4.01                       |")
     print("|                                                            |")
-    print("|updated: 23rd Feb 2023                                      |")
+    print("|updated: 16th May 2021                                      |")
     print("--------------------------------------------------------------") 
     if sl and A_Mods and B_Mods and charges and composition != '' :
         if output == 'full':
