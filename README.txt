@@ -1,4 +1,5 @@
-The original version of MC-EMMA is generally avalible from: https://github.com/lrcfmd/MC-EMMA-stable. The version provided uses Reinforcement Learning package RLCSP (https://github.com/lrcfmd/rlcsp) to optimize basin hopping routine.
+The original version of MC-EMMA is generally available from: https://github.com/lrcfmd/MC-EMMA-stable.
+The version provided uses Reinforcement Learning package RLCSP (https://github.com/lrcfmd/rlcsp) to optimize basin hopping routine.
 
 How to run MC-EMMA:
 

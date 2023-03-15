@@ -1,10 +1,19 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Oct 22 10:41:17 2020
+
+The input file to run MC-EMMA with RLCSP for YBa2Ca2Fe5O13
+
+@author: Elena Zamaraeva
+"""
 from mcemma_rl.mc_emma import *
 import numpy
 import sys
 """ Cubic structures """
 
 rep=[1,1,1]
-ap=3.9 
+ap=3.9
 
 #Make A blocks
 A1=Atoms("Ba4O4",cell=[2.*ap,2.*ap,0.5*ap],pbc=[1,1,1])
@@ -137,12 +146,10 @@ A_Mods={'orthorhombic':AMods},
 B_Mods={'orthorhombic':BMods},
 charges={"O":-2,"Ca":2,"Fe":3,"Y":3,"Ba":2},
 composition={"Y":1.0,"Ba":2.0,"Ca":2.0,"Fe":5.0,"O":13},
-# composition={"Y":1.0,"Ba":1.0,"Ca":2.0,"Fe":4.0,"O":10.5},
-#composition={"Ca":1.0,"Fe":1.0,"O":2.5},
 sl=[5,10],
 
 #mc run parameters
-startup=2,
+startup=3,
 smax=1000,
 rmax=100,
 smin=500,
@@ -151,24 +158,22 @@ red_T=0.025,
 delay = 0,
 graph_out='T',
 pert=(
-['T3',29],
-['T4',21],
-['T6',21],
-['T7',14],
-['T8',7],
-['T9',7],
-['T10',7],
-['T11',7]),
-tmax=1000000,
+['T1',29],
+['T2',21],
+['T3',21],
+['T4',14],
+['T5',7],
+['T6',7],),
+tmax=100000,
 gulp_command='gulp < gulp.gin > gulp.got',
-params_db={'host': 'localhost',
-            'database': '',
-            'user': 'root',
-            'password': 'MyRootPassword'},
+params_db={'host': 'HOST',
+            'database': 'reinforce_mcemma',
+            'user': 'USERNAME',
+            'password': 'PASSWORD'},
 alpha=0.01,
 reinforce_table='reinforce',
-theta_table='theta',
+theta_table='reinforce_theta',
 reinforce_id=dir_num,
-fixed_episodes=True
+reg_params={'e_threshold': 0.8, 'beta': 1, 'free_term': 0, 'h_type': 'linear'}
 )
 
