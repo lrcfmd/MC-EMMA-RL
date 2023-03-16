@@ -60,14 +60,14 @@ def run_gulp(atoms='',shel=None,kwds='',opts='',lib='',produce_steps='',
 				f=open("gulp.gin",'r')
 				f2=f.readlines()
 				cell=re.findall("\d+\.\d+",f2[6])
-				for j in range(len(cell)):
-					cell[i]=cell[j][:10]
+				for i in range(len(cell)):
+					cell[i]=cell[i][:10]
 					
 				f.close()
 				f3=open("gulp.gin",'w')
 				f2[6]=str(str(cell[0])+" "+str(cell[1])+" "+str(cell[2])+" "+str(cell[3])+" "+str(cell[4])+" "+str(cell[5])+"\n")
-				for j in range(len(f2)):
-					f3.write(f2[j])
+				for i in range(len(f2)):
+					f3.write(f2[i])
 				f3.close()
 				atoms=read_gulp("gulp.gin")
 				atoms.set_calculator(calc)
